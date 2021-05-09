@@ -765,6 +765,10 @@ impl<'a> Context<'a> {
         self
     }
 
+    pub fn get_vars(&self) -> ContextHashMap<String, f64> {
+        self.vars.clone()
+    }
+
     /// Adds a new function of one argument.
     pub fn func<S, F>(&mut self, name: S, func: F) -> &mut Self
     where
@@ -847,6 +851,14 @@ impl<'a> Context<'a> {
     {
         self.funcs.insert(name.into(), n_args.to_arg_guard(func));
         self
+    }
+
+    pub fn get_funcs(&self) -> Vec<String> {
+        self.funcs
+            .clone()
+            .into_iter()
+            .map(|(name, func)| name)
+            .collect()
     }
 }
 
